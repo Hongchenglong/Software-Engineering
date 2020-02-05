@@ -1,17 +1,21 @@
 #include <bits/stdc++.h> // 万能头文件 
 using namespace std;
-int toint(string value) { // toint函数将 汉字 转成 整数 
-	if (value == "零") return 0; 
-	if (value == "一") return 1; 
-	if (value == "二") return 2; 
-	if (value == "三") return 3; 
-	if (value == "四") return 4; 
-	if (value == "五") return 5; 
-	if (value == "六") return 6; 
-	if (value == "七") return 7; 
-	if (value == "八") return 8; 
-	if (value == "九") return 9; 
-	if (value == "十") return 10; 
+int toint(string value) { // toint函数将 汉字 转成 整数
+	int len = value.size(), ret = 0; 
+	for (int i = 0; i < len; i+=2) {
+		if (value.substr(i, 2) == "零") ret = ret*10 + 0; 
+		if (value.substr(i, 2) == "一") ret = ret*10 + 1; 
+		if (value.substr(i, 2) == "二") ret = ret*10 + 2; 
+		if (value.substr(i, 2) == "三") ret = ret*10 + 3; 
+		if (value.substr(i, 2) == "四") ret = ret*10 + 4; 
+		if (value.substr(i, 2) == "五") ret = ret*10 + 5;  
+		if (value.substr(i, 2) == "六") ret = ret*10 + 6; 
+		if (value.substr(i, 2) == "七") ret = ret*10 + 7; 
+		if (value.substr(i, 2) == "八") ret = ret*10 + 8;  
+		if (value.substr(i, 2) == "九") ret = ret*10 + 9; 
+		if (value.substr(i, 2) == "十") ret = ret*10 + 10;  
+	}
+	return ret;
 }
 int main() {
 	string var, value;
@@ -19,7 +23,6 @@ int main() {
 	for (int i = 0; i < 2; ++i) cin >> var; // 输入两遍，保留第二个变量名 
 	for (int i = 0; i < 2; ++i) cin >> value; // 输入两遍，保留第二个数字值 
 	int sum = toint(value); // 将value转换成整数 
-	
 	string some, oper, cmp;
 	while (cin >> some) { // 输入一个单词，判断是否等于变量名或“看看”或“如果” 
 		if (some == var) {
