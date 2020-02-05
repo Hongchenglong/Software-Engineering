@@ -31,10 +31,12 @@ int main() {
 			} 
 		} else if (some == "看看") {
 			cin >> var;
-			if (sum <= 10) {
-				cout << num[sum] << endl;	
+			int temp = abs(sum);
+			if (sum < 0) cout << "负"; 
+			if (temp <= 10) {
+				cout << num[temp] << endl;	
 			} else { // 大于10的情况 
-				int temp = sum, ssum = 0, cnt = 0;
+				int ssum = 0, cnt = 0;
 				while (temp) { // 逆置sum，用ssum保存 
 					ssum = ssum * 10 + temp % 10;
 					temp /= 10;
