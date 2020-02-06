@@ -24,7 +24,7 @@ int main() {
 	for (int i = 0; i < 2; ++i) cin >> var; // 输入两遍，保留第二个变量名 
 	for (int i = 0; i < 2; ++i) cin >> value; // 输入两遍，保留第二个数字值 
 	mp[var] = toint(value); // 将value转换成整数, 并存入mp[var]中 
-	
+	 
 	while (cin >> some) { // 输入一个单词，判断是否等于“整数”或“看看”或“如果”或变量名 
 		if (some == "整数") {
 			cin >> var >> other >> value; // 保留var和value 
