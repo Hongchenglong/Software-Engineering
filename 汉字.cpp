@@ -19,19 +19,19 @@ int toint(string value) { // toint函数将 汉字 转成 整数
 }
 int main() {
 	map<string, int> mp; 
-	string var, value, some, oper, cmp, other;
+	string var, value, word, oper, cmp, other;
 	string num[12] = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
-	for (int i = 0; i < 2; ++i) cin >> var; // 输入两遍，保留第二个变量名 
-	for (int i = 0; i < 2; ++i) cin >> value; // 输入两遍，保留第二个数字值 
-	mp[var] = toint(value); // 将value转换成整数, 并存入mp[var]中 
-	 
-	while (cin >> some) { // 输入一个单词，判断是否等于“整数”或“看看”或“如果”或变量名 
-		if (some == "整数") {
+	while (cin >> word) { // 输入一个单词，判断是否等于“整数”或“看看”或“如果”或变量名 
+		if (word == "整数") {
 			cin >> var >> other >> value; // 保留var和value 
 			mp[var] = toint(value);
-		} else if (some == "看看") {
+		} else if (word == "看看") {
 			cin >> var;
-			if (!mp[var]) continue; // 如果变量名不存在，则跳过 
+			if (!mp.count(var)) {
+				if (var[0] == '"' && var[var.size()-1] == '"') 
+					cout << var.substr(1,var.size()-2) << endl;
+				continue; // 跳过计算步骤 
+			}
 			int temp = abs(mp[var]);
 			if (mp[var] < 0) cout << "负"; 
 			if (temp <= 10) {
@@ -49,7 +49,7 @@ int main() {
 				}
 				cout << endl;
 			}
-		} else if (some == "如果") {
+		} else if (word == "如果") {
 			string digit, then, s1, s2, s3, s4, s5;
 			cin >> var >> cmp >> digit;
 			cin >> then >> s1 >> s2 >> s3 >> s4 >> s5;
@@ -82,12 +82,12 @@ int main() {
 					} else;
 				} 
 			}		 
-		} else if (mp[some]) { // 如果是已存在的变量 
+		} else if (mp.count(word)) { // 如果是已存在的变量 
 			cin >> oper >> value;
 			if (oper == "减少") {
-				mp[some] -= toint(value); 
+				mp[word] -= toint(value); 
 			} else if (oper == "增加") {
-				mp[some] += toint(value); 
+				mp[word] += toint(value); 
 			} 
 		} 
 	}
