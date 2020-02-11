@@ -32,6 +32,7 @@ int main() {
 					cout << var.substr(1,var.size()-2) << endl;
 				else if (var.substr(0,2) == "“" && var.substr(var.size()-2,2) == "”") 
 					cout << var.substr(2,var.size()-4) << endl; 
+				else cout << "无此变量：" << var << endl; 
 				continue; // 跳过计算步骤 
 			}
 			int temp = abs(mp[var]);
@@ -55,6 +56,10 @@ int main() {
 			string digit, then, s1, s2, s3, s4, s5;
 			cin >> var >> cmp >> digit;
 			cin >> then >> s1 >> s2 >> s3 >> s4 >> s5;
+			if (!mp.count(var)) {
+				cout << "无此变量：" << var << endl; 
+				continue;
+			}
 			if (s1 == "看看") {
 				int len1, len2, start;
 				if (s2[0] == '"' && s2[s2.size()-1] == '"') {
@@ -74,6 +79,10 @@ int main() {
 					else cout << s5.substr(start, len2) << endl;
 				} 
 			} else {
+				if (!mp.count(word)) {
+					cout << "无此变量：" << s1 << endl; 
+					continue;
+				}
 				if (cmp == "大于") {
 					if (mp[var] > toint(digit)) {
 						if (s2 == "减少") {
@@ -99,7 +108,9 @@ int main() {
 			} else if (oper == "增加") {
 				mp[word] += toint(value); 
 			} 
-		} 
+		} else { //不存在的变量 
+			cout << "无此变量：" << var << endl; 
+		}
 	}
 	return 0;
 } 
