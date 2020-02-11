@@ -30,6 +30,8 @@ int main() {
 			if (!mp.count(var)) {
 				if (var[0] == '"' && var[var.size()-1] == '"') 
 					cout << var.substr(1,var.size()-2) << endl;
+				else if (var.substr(0,2) == "“" && var.substr(var.size()-2,2) == "”") 
+					cout << var.substr(2,var.size()-4) << endl; 
 				continue; // 跳过计算步骤 
 			}
 			int temp = abs(mp[var]);
@@ -54,14 +56,22 @@ int main() {
 			cin >> var >> cmp >> digit;
 			cin >> then >> s1 >> s2 >> s3 >> s4 >> s5;
 			if (s1 == "看看") {
-				int len1 = s2.size()-2; // 减去头尾两个双引号的长度 
-				int len2 = s5.size()-2;
+				int len1, len2, start;
+				if (s2[0] == '"' && s2[s2.size()-1] == '"') {
+					len1 = s2.size()-2; // 减去头尾两个英文双引号的长度 
+					len2 = s5.size()-2;
+					start = 1; 
+				} else if (s2.substr(0,2) == "“" && s2.substr(s2.size()-2,2) == "”") {
+					len1 = s2.size()-4; // 减去头尾两个中文双引号的长度 
+					len2 = s5.size()-4;
+					start = 2; 
+				}
 				if (cmp == "大于") {
-					if (mp[var] > toint(digit)) cout << s2.substr(1, len1) << endl;
-					else cout << s5.substr(1, len2) << endl; // 输出去掉头尾的子串 
+					if (mp[var] > toint(digit)) cout << s2.substr(start, len1) << endl;
+					else cout << s5.substr(start, len2) << endl; // 输出去掉头尾的子串 
 				} else if (cmp == "小于") {
-					if (mp[var] < toint(digit)) cout << s2.substr(1, len1) << endl;
-					else cout << s5.substr(1, len2) << endl;
+					if (mp[var] < toint(digit)) cout << s2.substr(start, len1) << endl;
+					else cout << s5.substr(start, len2) << endl;
 				} 
 			} else {
 				if (cmp == "大于") {
